@@ -6,7 +6,7 @@ from login.login import login
 from symbols import symbols
 from utility import utility
 
-analysistime=300
+analysistime=15
 
 access_token = login.SetupLogin()
 
