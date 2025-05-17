@@ -1,17 +1,14 @@
 from colorama import Fore
 import numpy
-
 import talib
-
 from utility import utility
 
-
 class EMA200:
+  
     def check(symbol,period,open,high,low,close,df):
         # print("200DMA start: " + datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3])        
         # open,high,low,close = utility.getOHLC(response["candles"])
-        ema200=talib.EMA(
-               numpy.array(close), timeperiod = 200).tolist()
+        ema200=talib.EMA(numpy.array(close), timeperiod = 200).tolist()
         emaLength = len(ema200)-1
         latestClose = close[emaLength-1]
         previousClose = close[emaLength-2]

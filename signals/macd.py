@@ -1,7 +1,6 @@
 from colorama import Fore
 import numpy
 import talib
-from utility import utility
 
 
 class macd:

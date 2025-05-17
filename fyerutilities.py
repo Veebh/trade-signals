@@ -1,21 +1,22 @@
-import csv
-import webbrowser
-import numpy
-import requests
-from datetime import datetime 
-from fyers_api import accessToken
 
+
+from datetime import datetime
 import os
 
+import numpy
 import talib
 from Patterns.BullishEngulfing import BullishEngulfing
-from customsignals.run.supertrend.runsupertrendstrategy import runsupertrendstrategy
-from customsignals.strategies.ema926cci import ema926cci
 from configuration import configuration
+from customsignals.run.supertrend import runsupertrendstrategy
+from customsignals.strategies.ema926cci import ema926cci
+from signals.DMI import DMI
+from signals.EMA200 import EMA200
+from signals.aroon import aroon
+from signals.cci import cci
 from signals.ema9_26 import EMA9_26
 from signals.supertrend import supertrend
-from signals.macd import macd
 from utility import utility
+from signals.macd import macd
 
 class fyerutilities:
     
@@ -48,15 +49,15 @@ class fyerutilities:
         response=utility.getData(client_id,access_token,symbol,period)
         open,high,low,close,candleTime = utility.getOHLC(response["candles"])
         df = utility.getDataFrame(response["candles"])
-        # macd.check(symbol,period,open,high,low,close,df)
-        # # EMA200.check(symbol,period,open,high,low,close,df)
-        # supertrend.check(symbol,period,open,high,low,close,df)
-        # # DMI.check(symbol,period,open,high,low,close,df)
-        # # aroon.check(symbol,period,open,high,low,close,df)
-        # EMA9_26.check(symbol,period,open,high,low,close,df)
-        # # cci.check(symbol,period,open,high,low,close,df)
-        # ema926cci.check(symbol,period,open,high,low,close,df)
-        # # print(str(datetime.now().strftime("%H:%M:%S,%f")))
+        macd.check(symbol,period,open,high,low,close,df)
+        EMA200.check(symbol,period,open,high,low,close,df)
+        supertrend.check(symbol,period,open,high,low,close,df)
+        DMI.check(symbol,period,open,high,low,close,df)
+        aroon.check(symbol,period,open,high,low,close,df)
+        EMA9_26.check(symbol,period,open,high,low,close,df)
+        cci.check(symbol,period,open,high,low,close,df)
+        ema926cci.check(symbol,period,open,high,low,close,df)
+        # print(str(datetime.now().strftime("%H:%M:%S,%f")))
         BullishEngulfing.check(symbol,period,open,high,low,close,candleTime,df)
 
     def getStockData(row, access_token,symbol,numberOfDays,period):
